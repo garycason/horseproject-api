@@ -1,0 +1,46 @@
+[
+    {
+        "model": "horseapi.horse",
+        "pk": 1,
+        "fields": {
+            "name": "Secretariat",
+            "date_of_birth": "1970-03-30",
+            "total_races": 21,
+            "total_earnings": "123456.78",
+            "user": 1
+        }
+    },
+    {
+        "model": "horseapi.horse",
+        "pk": 2,
+        "fields": {
+            "name": "Seabiscuit",
+            "date_of_birth": "1933-05-23",
+            "total_races": 89,
+            "total_earnings": "437730.00",
+            "user": 2
+        }
+    },
+    {
+        "model": "horseapi.horse",
+        "pk": 3,
+        "fields": {
+            "name": "Man o' War",
+            "date_of_birth": "1917-03-29",
+            "total_races": 21,
+            "total_earnings": "249465.00",
+            "user": 1
+        }
+    },
+    {
+        "model": "horseapi.horse",
+        "pk": 4,
+        "fields": {
+            "name": "Black Caviar",
+            "date_of_birth": "2006-08-18",
+            "total_races": 25,
+            "total_earnings": "7700000.00",
+            "user": 2
+        }
+    }
+]

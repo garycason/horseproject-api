@@ -1,0 +1,38 @@
+[
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$260000$zYX4lXzYyzJu$yW1Qv95bHv7kg0PZmiWmN6auBoN56erLkFcFq25AX2Q=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "GarrettCason",
+            "first_name": "Garrett",
+            "last_name": "Cason",
+            "email": "Garrett@aol.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-01-01T00:00:00Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 2,
+        "fields": {
+            "password": "pbkdf2_sha256$260000$4B9aQj5VhCNC$S1Ttjl69eqHG5ymBnzdr7fgXlwovMK48Yo1QU8oE5TA=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "bigballer",
+            "first_name": "Lavar",
+            "last_name": "Ball",
+            "email": "Lavar@yahoo.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2024-01-01T00:00:00Z",
+            "groups": [],
+            "user_permissions": []
+        }
+    }
+]
