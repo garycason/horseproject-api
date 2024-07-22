@@ -1,0 +1,18 @@
+[
+    {
+        "model": "horseapi.favoritehorse",
+        "pk": 1,
+        "fields": {
+            "user": 1,
+            "horse": 2
+        }
+    },
+    {
+        "model": "horseapi.favoritehorse",
+        "pk": 2,
+        "fields": {
+            "user": 2,
+            "horse": 1
+        }
+    }
+]
