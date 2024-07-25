@@ -1,3 +1,4 @@
 from .horses import Horses
-from .favorite_horses import FavoriteHorses
-from .users import UserViewSet, LoginView
+from .favorite_horses import FavoriteHorseViewSet
+from .auth import register_user, login_user
+from .users import UserViewSet
