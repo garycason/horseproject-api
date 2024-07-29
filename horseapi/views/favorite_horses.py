@@ -3,7 +3,14 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from horseapi.models.favoritehorse import FavoriteHorse, Horse
 
+class HorseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Horse
+        fields = ['id', 'name', 'date_of_birth', 'total_races', 'total_earnings']
+
 class FavoriteHorseSerializer(serializers.ModelSerializer):
+    horse = HorseSerializer()
+
     class Meta:
         model = FavoriteHorse
         fields = ('id', 'user', 'horse')
