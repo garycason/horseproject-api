@@ -1,13 +1,10 @@
 from django.contrib import admin
-from django.urls import include, path
-from rest_framework.authtoken.views import obtain_auth_token
-from horseapi.views import register_user, login_user
+from django.urls import path, include
+from horseapi.views.auth import RegisterAPI, LoginAPI
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('horseapi.urls')),
-    path('register/', register_user),
-    path('login/', login_user),
-    path('api-token-auth/', obtain_auth_token),
+    path('api/auth/register/', RegisterAPI.as_view(), name='register'),
+    path('api/auth/login/', LoginAPI.as_view(), name='login'),
 ]
-

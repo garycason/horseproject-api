@@ -1,4 +1,6 @@
+# horseapi/views/__init__.py
+
+from .auth import RegisterAPI, LoginAPI
 from .horses import Horses
 from .favorite_horses import FavoriteHorseViewSet
-from .auth import register_user, login_user
-from .users import UserViewSet
+from .users import UserViewSet, LoginView

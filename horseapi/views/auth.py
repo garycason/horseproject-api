@@ -1,31 +1,34 @@
-from django.contrib.auth.models import User
+#auth.py
+from rest_framework import generics
+from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework.serializers import ValidationError
+from django.contrib.auth import authenticate
 
-@api_view(['POST'])
-def register_user(request):
-    """Handle POST operations for registering a user"""
-    try:
-        user = User.objects.create_user(
-            username=request.data['username'],
-            password=request.data['password']
-        )
-        token = Token.objects.create(user=user)
-        return Response({'token': token.key}, status=status.HTTP_201_CREATED)
-    except Exception as ex:
-        return Response({'message': str(ex)}, status=status.HTTP_400_BAD_REQUEST)
+from horseapi.serializers import RegisterSerializer, UserSerializer
 
-@api_view(['POST'])
-def login_user(request):
-    """Handle POST operations for logging in a user"""
-    try:
-        user = User.objects.get(username=request.data['username'])
-        if user.check_password(request.data['password']):
-            token, created = Token.objects.get_or_create(user=user)
-            return Response({'token': token.key}, status=status.HTTP_200_OK)
-        else:
-            return Response({'message': 'Invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
-    except User.DoesNotExist:
-        return Response({'message': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+class RegisterAPI(generics.GenericAPIView):
+    serializer_class = RegisterSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.save()
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            "user": UserSerializer(user, context=self.get_serializer_context()).data,
+            "token": token.key
+        })
+
+class LoginAPI(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data, context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        return Response({
+            'token': token.key,
+            'user_id': user.id,
+            'username': user.username
+        })
