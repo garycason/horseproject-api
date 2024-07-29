@@ -1,14 +1,15 @@
-from django.urls import include, path
-from rest_framework import routers
-from .views.horses import Horses
-from .views.favorite_horses import FavoriteHorses
-from .views.users import UserViewSet
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import RegisterAPI, LoginAPI, FavoriteHorseViewSet, UserViewSet, LoginView, Horses
 
-router = routers.DefaultRouter(trailing_slash=False)
-router.register(r'horses', Horses, basename='horse')
-router.register(r'favorite_horses', FavoriteHorses, basename='favoritehorse')
+router = DefaultRouter()
 router.register(r'users', UserViewSet, basename='user')
+router.register(r'favoritehorses', FavoriteHorseViewSet, basename='favoritehorse')
+router.register(r'horses', Horses, basename='horse')
 
 urlpatterns = [
+    path('register/', RegisterAPI.as_view(), name='register'),
+    path('login/', LoginAPI.as_view(), name='login'),
+    path('api-token-auth/', LoginView.as_view(), name='api_token_auth'),
     path('', include(router.urls)),
 ]

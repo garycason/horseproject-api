@@ -1,12 +1,10 @@
-
-
+#favorite_horses.py
 from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from horseapi.models import FavoriteHorse, Horse
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
-
 
 class FavoriteHorseSerializer(serializers.HyperlinkedModelSerializer):
     """JSON serializer for favorite horses"""
@@ -18,8 +16,7 @@ class FavoriteHorseSerializer(serializers.HyperlinkedModelSerializer):
         )
         fields = ('id', 'url', 'user', 'horse')
 
-
-class FavoriteHorses(ViewSet):
+class FavoriteHorseViewSet(ViewSet):
     """Favorite Horses management"""
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
