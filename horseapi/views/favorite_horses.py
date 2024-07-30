@@ -32,6 +32,7 @@ class FavoriteHorseViewSet(viewsets.ViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def list(self, request):
+        # Ensure favorite horses are filtered by the authenticated user
         favorite_horses = FavoriteHorse.objects.filter(user=request.user)
         serializer = FavoriteHorseSerializer(favorite_horses, many=True)
         return Response(serializer.data)
