@@ -1,4 +1,3 @@
-#horses.py
 from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
@@ -35,20 +34,22 @@ class Horses(ViewSet):
             return HttpResponseServerError(ex)
 
     def update(self, request, pk=None):
-        horse = Horse.objects.get(pk=pk)
-        horse.name = request.data["name"]
-        horse.date_of_birth = request.data["date_of_birth"]
-        horse.total_races = request.data["total_races"]
-        horse.total_earnings = request.data["total_earnings"]
-        horse.save()
-
-        return Response({}, status=status.HTTP_204_NO_CONTENT)
+        try:
+            horse = Horse.objects.get(pk=pk)
+            serializer = HorseSerializer(horse, data=request.data, partial=True)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Horse.DoesNotExist:
+            return Response({'message': 'Horse not found'}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as ex:
+            return Response({'message': str(ex)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def destroy(self, request, pk=None):
         try:
             horse = Horse.objects.get(pk=pk)
             horse.delete()
-
             return Response({}, status=status.HTTP_204_NO_CONTENT)
         except Horse.DoesNotExist as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
@@ -57,6 +58,5 @@ class Horses(ViewSet):
 
     def list(self, request):
         horses = Horse.objects.all()
-        serializer = HorseSerializer(
-            horses, many=True, context={'request': request})
+        serializer = HorseSerializer(horses, many=True, context={'request': request})
         return Response(serializer.data)
