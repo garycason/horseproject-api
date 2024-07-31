@@ -1,4 +1,7 @@
 #auth.py
+#Provides registration and login functionality.
+#The RegisterAPI handles user registration, creating a user and returning a token.
+#The LoginAPI handles user login, returning a token and user details.
 from rest_framework import generics
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token

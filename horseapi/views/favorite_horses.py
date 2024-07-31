@@ -1,3 +1,9 @@
+#Manages CRUD operations for horses.
+#create method allows users to add a new horse.
+#retrieve method returns details of a specific horse.
+#update method updates details of a specific horse.
+#destroy method deletes a specific horse.
+#list method returns all horses
 from rest_framework import serializers, viewsets, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
