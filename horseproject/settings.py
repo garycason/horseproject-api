@@ -131,3 +131,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# The Racing API credentials
+RACING_API_USERNAME = 'eBJkg3Hlaoe8p0NJ0IyKwJqO'
+RACING_API_PASSWORD = 'i3AZmbJJDGEvj1YSPI2W8yR9'
