@@ -1,3 +1,4 @@
+#Defines the Horse model with attributes like name, date_of_birth, total_races, total_earnings, and a relationship to the User model.
 from django.contrib.auth.models import User
 from django.db import models
 
